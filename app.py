@@ -1,6 +1,7 @@
 import os
 from db import db
-from flask import Flask, render_template
+from pathlib import Path
+from flask import Flask, render_template, send_from_directory, url_for
 from controllers.lc_problem import lc_problems
 from controllers.lc_section import lc_sections
 from resources.lc_section import LcSectionListResource
@@ -22,6 +23,12 @@ def create_tables():
 @app.route('/home')
 def home():
     return render_template('index.html')
+
+
+@app.route('/resume', methods=['GET'])
+def resume():
+    folder_path = os.path.join(app.root_path, "static/files")
+    return send_from_directory(directory=folder_path, path='Sudeep_Dalai_Resume.pdf')
 
 
 @app.route('/leetcode')
