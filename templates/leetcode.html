@@ -1,0 +1,65 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+    {% for item in data %}
+
+    <div class="accordion" id="leetcodeProblems">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="{{ item['card_id'] }}">
+                <button class="accordion-button" type="button" data-toggle="collapse"
+                    data-target="#{{ item['collapse_id'] }}" aria-expanded="true"
+                    aria-controls="{{ item['collapse_id'] }}">
+                    {{ item['heading'] }}
+                </button>
+            </h2>
+            <div id="{{ item['collapse_id'] }}" class="accordion-collapse collapse"
+                aria-labelledby="{{ item['card_id'] }}" data-parent="#leetcodeProblems">
+                <div class="accordion-body">
+
+                    <table class="table table-bordered table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Problem</th>
+                                <th scope="col" class="text-center">Difficulty</th>
+                                <th scope="col" class="text-center">Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prob in item['problems']%}
+                            <tr>
+                                <td>
+                                    <a href="{{ prob['problem_link'] }}" target="_blank">
+                                        {{ prob['problem_title'] }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    {% if prob['difficulty'] == 0 %}
+                                    <button type="button" class="btn btn-success">Easy</button>
+                                    {% elif prob['difficulty'] == 1 %}
+                                    <button type="button" class="btn btn-warning">Medium</button>
+                                    {% elif prob['difficulty'] == 2 %}
+                                    <button type="button" class="btn btn-danger">Hard</button>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a style="text-decoration: none;" target="_blank"
+                                        href="{{ prob['solution_link'] }}">
+                                        <button type="button" class="btn btn-outline-light">Python</button>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}
