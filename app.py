@@ -10,7 +10,7 @@ from resources.lc_section import LcSectionListResource
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://xygvsxihjpstck:d9851e5ce4fac969f99b14a8684c79a482fbd420cc0a5ccac823ac9fb32211f1@ec2-34-233-115-14.compute-1.amazonaws.com:5432/de2kjmtpjvm8j7').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
